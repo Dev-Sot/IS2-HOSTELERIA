@@ -1,0 +1,25 @@
+{% extends 'layouts/plantilla.html' %}
+{% load static %}
+
+{% block content %}
+<section class="services-section">
+    <h1>Servicios Disponibles</h1>
+
+    <div class="services-grid">
+        {% for ser in servicios %}
+            {% if ser.disponible %}
+            <article class="service-card available">
+                <img src="{% static '' %}{{ ser.numero }}.jpg" alt="Imagen del servicio {{ ser.numero }}" class="service-image">
+                <h3>{{ ser }}</h3>
+                <p><strong>Especificaciones:</strong> {{ ser.especificacion }}</p>
+                <p><strong>Valor:</strong> {{ ser.valor }} COP (≈{{ ser.valor_dolares }} USD)</p>
+            </article>
+            {% else %}
+            <article class="service-card unavailable">
+                <h3>{{ ser }} <span class="status-unavailable">No disponible</span></h3>
+            </article>
+            {% endif %}
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
